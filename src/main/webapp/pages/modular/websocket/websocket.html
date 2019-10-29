@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket</title>
+    <link rel="stylesheet" href="/assets/common/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/assets/modular/websocket/websocket.css"/>
+</head>
+<body>
+    <div class="layui-container">
+        常规布局（以中型屏幕桌面为例）：
+        <div class="layui-row">
+            <div class="layui-col-md3">
+                你的内容 9/12
+            </div>
+            <div class="layui-col-md3">
+                你的内容 3/12
+            </div>
+        </div>
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+            <input id="message" placeholder="请输入消息！" type="text" class="layui-input"/>
+        </div>
+        <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+            <input id="send" type="button" class="layui-btn" value="send"/>
+        </div>
+        <div id="msg">
+        </div>
+    </div>
+</body>
+
+<script id="popupEdit" type="text/html">
+
+</script>
+
+<script type="text/javascript" src="/assets/common/layui/layui.js"></script>
+<script type="text/javascript" src="/assets/modular/websocket/websocket.js"></script>
+
+</html>
