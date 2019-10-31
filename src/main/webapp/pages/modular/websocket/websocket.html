@@ -7,22 +7,14 @@
     <link rel="stylesheet" href="/assets/modular/websocket/websocket.css"/>
 </head>
 <body>
-    <div class="layui-container">
-        常规布局（以中型屏幕桌面为例）：
-        <div class="layui-row">
-            <div class="layui-col-md3">
-                你的内容 9/12
-            </div>
-            <div class="layui-col-md3">
-                你的内容 3/12
-            </div>
-        </div>
+    <div id="msg-card" style="padding: 20px; background-color: #F2F2F2;">
+
     </div>
-    <div class="layui-fluid">
-        <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+    <div class="layui-col-xs12">
+        <div class="layui-col-xs9 layui-col-sm9 layui-col-md9">
             <input id="message" placeholder="请输入消息！" type="text" class="layui-input"/>
         </div>
-        <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+        <div class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="text-align: right">
             <input id="send" type="button" class="layui-btn" value="send"/>
         </div>
         <div id="msg">
@@ -30,8 +22,17 @@
     </div>
 </body>
 
-<script id="popupEdit" type="text/html">
-
+<script id="item" type="text/html">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card" style="text-align: {{d.align}}">
+                <span>{{d.self}}</span><i class="layui-icon layui-icon-friends" style="font-size: 30px; color: #1E9FFF;"></i><span>{{d.friend}}</span>
+                <div class="layui-card-body">
+                    {{d.message}}
+                </div>
+            </div>
+        </div>
+    </div>
 </script>
 
 <script type="text/javascript" src="/assets/common/layui/layui.js"></script>

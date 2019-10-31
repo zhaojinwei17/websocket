@@ -1,12 +1,13 @@
 function func(data){
     alert(data);
 }
-layui.use(['table', 'form', 'laydate','layer'], function () {
+layui.use(['table', 'form', 'laydate','layer','laytpl'], function () {
     var $ = layui.$;
     var table = layui.table;
     var form = layui.form;
     var laydate = layui.laydate;
     var layer = layui.layer;
+    var laytpl = layui.laytpl;
 
     var sid=createUUID();
     console.log("this sid :" + sid)
@@ -19,7 +20,7 @@ layui.use(['table', 'form', 'laydate','layer'], function () {
         console.log("您的浏览器支持WebSocket");
         //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
         //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-        socket = new WebSocket("ws://localhost/websocket/"+sid);
+        socket = new WebSocket("ws://localhost:8080/websocket/"+sid);
         //打开事件
         socket.onopen = function() {
             console.log("Socket 已打开");
@@ -45,17 +46,34 @@ layui.use(['table', 'form', 'laydate','layer'], function () {
 
     function onmessage(msg){
         var data=JSON.parse(msg.data);
-        if(!data.from){
-            console.log(false);
-        }else {
-            console.log(data.from.sid==sid);
+        if(data.from && data.from.sid!=sid){
+            var d = {
+                "self": "" ,
+                "friend": data.from.sid,
+                "message": data.message,
+                "align": "left"
+            }
+            laytpl(item.innerHTML).render(d, function(html){
+                $("#msg-card").append(html);
+            });
+        }else{
+            $("#message").val("");
         }
-        console.log(data);
     }
 
     //搜索
     $('#send').on('click', function(){
         socket.send($("#message").val());
+        var d = {
+            "self": sid,
+            "friend": "",
+            "message": $("#message").val(),
+            "align": "right"
+        }
+        laytpl(item.innerHTML).render(d, function(html){
+            $("#msg-card").append(html);
+        });
+
         // $.ajax({
         //     type : "get",    //请求类型
         //     url : "http://localhost:80/jsonp/test.do",//请求的 URL地址
